@@ -6,14 +6,10 @@ const forecast = (latitude, longitude, callback) => {
     request({ url, json: true }, (error, {body}) => {
         if (error) {
             callback('Unable to Connect to weather service!', undefined);
-        } else if (body.error) {
+        } else if (body.error)  {
             callback('Unable to find location. Try another search', undefined);
         } else {
-            callback(undefined, {
-                summary: body.daily.data[0].summary,
-                temperature: body.currently.temperature,
-                precipProbability: body.currently.precipProbability,
-            })
+            callback(undefined, body.daily.data[0].summary + ' It is currently ' + body.currently.temperature + " degrees celsius. The precipitation is " + body.currently.precipProbability + ". The current wind speed is " + body.currently.windSpeed + " m/s.")
         }
     });
 };
